@@ -46,6 +46,11 @@ function generateTitleLinks(){
 
   /* for each article */
 
+  /* find all the articles and save them to variable: articles */
+  /* ... */
+
+  let html = '';
+
   const articles = document.querySelectorAll(optArticleSelector);
   for (article of articles) {
 
@@ -67,10 +72,16 @@ function generateTitleLinks(){
 
   /*
   titleList.innerHTML = titleList.innerHTML + linkHTML;
-  }*/
+  }
             
   titleList.insertAdjacentHTML('afterbegin', linkHTML);
+  */
+  html = html + linkHTML;
   }
+  console.log('html :', html)
+  
+  titleList.innerHTML = html;
+
 }
 
 generateTitleLinks();
