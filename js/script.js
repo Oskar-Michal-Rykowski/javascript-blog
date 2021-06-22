@@ -42,20 +42,16 @@ function generateTitleLinks(){
   /* remove contents of titleList */
 
   const titleList = document.querySelector(optTitleListSelector);
-  titleList.innerHTML = '';
+  /*titleList.innerHTML = '';*/
 
-/* for each article */
+  /* for each article */
 
-const articles = document.querySelectorAll(optArticleSelector);
-for (article of articles) {
+  const articles = document.querySelectorAll(optArticleSelector);
+  for (article of articles) {
 
+  /* get the article id */
 
-
-
-/* get the article id */
-
-const articleId = article.getAttribute('id')
-
+  const articleId = article.getAttribute('id');
 
   /* find the title element */
 
@@ -66,13 +62,16 @@ const articleId = article.getAttribute('id')
   /* create HTML of the link */
 
   const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-console.log('linkHTML' + linkHTML)
+  console.log('linkHTML' + linkHTML);
   /* insert link into titleList */
 
-  titleList.innerHTML = titleList.innerHTML + linkHTML;}
+  /*
+  titleList.innerHTML = titleList.innerHTML + linkHTML;
+  }*/
+            
+  titleList.insertAdjacentHTML('afterbegin', linkHTML);
+  }
 }
-
-
 
 generateTitleLinks();
   
