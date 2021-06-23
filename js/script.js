@@ -75,7 +75,7 @@ function generateTags(){
   for (article of articles) {
     /* find tags wrapper */
     const articleTagList = article.querySelector(optArticleTagsSelector);
-    console.log('articleTagList :', articleTagList)
+    console.log('articleTagList :', articleTagList);
     
     /* make html variable with empty string */
     
@@ -91,20 +91,20 @@ function generateTags(){
     const articleTagsArray = articleTags.split(' ');
 console.log('articleTagsArray', articleTagsArray);
     /* START LOOP: for each tag */
-   for(let tag of articleTagsArray){
+   for (let tag of articleTagsArray){
     console.log('tag :', tag);
-
+    
     /* generate HTML of the link */
-    const tagsLinks = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+    const tagsLinks = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
     console.log('tagLinks' + tagsLinks);
       /* add generated code to html variable */
-      html = html + tagsLinks;
+      html = html + tagsLinks + '  ';
       console.log('html :', html);
    }
     /* END LOOP: for each tag */
-    
-    /* insert HTML of all the links into the tags wrapper */
     articleTagList.innerHTML = html;
+    /* insert HTML of all the links into the tags wrapper */
+    
   /* END LOOP: for every article: */
   }
 }
