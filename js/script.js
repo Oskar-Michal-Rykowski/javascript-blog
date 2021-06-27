@@ -152,10 +152,8 @@ function generateTags() {
       tag +
       '">' +
       tag +
-      '</a> (' +
-      allTags[tag] +
-      ') ' +
-      '</li>';
+      '  ' +
+      '</a>   </li>';
 
     console.log('tagLinkHTML:', tagLinkHTML);
 
