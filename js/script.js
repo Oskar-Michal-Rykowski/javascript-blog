@@ -293,9 +293,9 @@ function generateAuthors() {
   /* [NEW] START LOOP: for each tag in allTags: */
   for (let articleAuthor in allAuthors) {
     const authorLinkHTML =
-      '<li><a class=' +
-      calculateAuthorClass(allAuthors[author], authorsParams) +
-      '"href="#tag-' +
+      '<li><a class="' +
+      calculateAuthorClass(allAuthors[articleAuthor], authorsParams) +
+      '"href="#author-' +
       articleAuthor +
       '">' +
       articleAuthor +
