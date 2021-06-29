@@ -30,7 +30,7 @@ const optArticleSelector = '.post',
   optArticleAuthorSelector = '.post-author',
   optTagsListSelector = '.list .tags',
   optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
+  optCloudClassPrefix = 'cloud-item-';
 
 function generateTitleLinks(customSelector = '') {
   console.log('customSelector :', customSelector);
@@ -232,6 +232,16 @@ function calculateAuthorsParams(authors) {
   return params;
 }
 
+function calculateAuthorClass(count, params) {
+  const normalizedCount = count - params.min;
+
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
+
+  return optCloudClassPrefix + classNumber;
+}
+
 function generateAuthors() {
   let allAuthors = {};
   /* find all articles */
@@ -282,8 +292,17 @@ function generateAuthors() {
 
   /* [NEW] START LOOP: for each tag in allTags: */
   for (let articleAuthor in allAuthors) {
+    const authorLinkHTML =
+      '<li><a class=' +
+      calculateAuthorClass(allAuthors[author], authorsParams) +
+      '"href="#tag-' +
+      articleAuthor +
+      '">' +
+      articleAuthor +
+      '</a></li>';
+
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    allAuthorsHTML += articleAuthor + ' (' + allAuthors[articleAuthor] + ') ';
+    allAuthorsHTML += authorLinkHTML;
   }
   /* [NEW] END LOOP: for each tag in allTags: */
 
