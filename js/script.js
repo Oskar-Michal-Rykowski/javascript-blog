@@ -152,8 +152,7 @@ function generateTags() {
       tag +
       '">' +
       tag +
-      '  ' +
-      '</a>   </li>';
+      '</a></li>';
 
     console.log('tagLinkHTML:', tagLinkHTML);
 
@@ -222,6 +221,8 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 function generateAuthors() {
+  let allAuthors = [];
+  console.log('allAuthors', allAuthors);
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -246,10 +247,20 @@ function generateAuthors() {
       articleAuthor +
       '</a>';
 
+    /* [NEW] check if this link is NOT already in allTags */
+    if (allAuthors.indexOf(articleAuthor) == -1) {
+      /* [NEW] add generated code to allTags array */
+      allAuthors.push(articleAuthor);
+    }
     /* insert HTML of all the links into the tags wrapper */
     articleAuthorPlace.innerHTML = html;
     /* END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const authorList = document.querySelector('.authors');
+
+  /* [NEW] add html from allTags to tagList */
+  authorList.innerHTML = allAuthors.join(' ');
 }
 
 generateAuthors();
