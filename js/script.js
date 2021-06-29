@@ -220,9 +220,20 @@ function addClickListenersToTags() {
 
 addClickListenersToTags();
 
+function calculateAuthorsParams(authors) {
+  /* make const params which value will object with keys min and max to...  */
+  const params = { max: 0, min: 999999 };
+  //Receive new params
+  for (let author in authors) {
+    console.log(author + ' is used ' + authors[author] + ' times');
+    params.max = Math.max(authors[author], params.max);
+    params.min = Math.min(authors[author], params.min);
+  }
+  return params;
+}
+
 function generateAuthors() {
-  let allAuthors = [];
-  console.log('allAuthors', allAuthors);
+  let allAuthors = {};
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -248,19 +259,36 @@ function generateAuthors() {
       '</a>';
 
     /* [NEW] check if this link is NOT already in allTags */
-    if (allAuthors.indexOf(articleAuthor) == -1) {
-      /* [NEW] add generated code to allTags array */
-      allAuthors.push(articleAuthor);
-    }
+
     /* insert HTML of all the links into the tags wrapper */
     articleAuthorPlace.innerHTML = html;
     /* END LOOP: for every article: */
+
+    if (!allAuthors[articleAuthor]) {
+      /* [NEW] add generated code to allTags array */
+      allAuthors[articleAuthor] = 1;
+    } else {
+      allAuthors[articleAuthor]++;
+    }
   }
   /* [NEW] find list of tags in right column */
-  const authorList = document.querySelector('.authors');
+  const authorsList = document.querySelector('.authors');
 
-  /* [NEW] add html from allTags to tagList */
-  authorList.innerHTML = allAuthors.join(' ');
+  const authorsParams = calculateAuthorsParams(allAuthors);
+  console.log('authorsParams:', authorsParams);
+
+  /* [NEW] create variable for all links HTML code */
+  let allAuthorsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for (let articleAuthor in allAuthors) {
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    allAuthorsHTML += articleAuthor + ' (' + allAuthors[articleAuthor] + ') ';
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+
+  /*[NEW] add HTML from allTagsHTML to tagList */
+  authorsList.innerHTML = allAuthorsHTML;
 }
 
 generateAuthors();
