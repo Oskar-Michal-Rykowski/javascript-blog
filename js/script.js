@@ -33,7 +33,6 @@ const optArticleSelector = '.post',
   optCloudClassPrefix = 'cloud-item-';
 
 function generateTitleLinks(customSelector = '') {
-  console.log('customSelector :', customSelector);
   const titleList = document.querySelector(optTitleListSelector);
 
   let html = '';
@@ -41,7 +40,6 @@ function generateTitleLinks(customSelector = '') {
   const articles = document.querySelectorAll(
     optArticleSelector + customSelector
   );
-  console.log('articles :', articles);
 
   for (let article of articles) {
     const articleId = article.getAttribute('id');
@@ -74,7 +72,6 @@ function calculateTagsParams(tags) {
   const params = { max: 0, min: 999999 };
   //Receive new params
   for (let tag in tags) {
-    console.log(tag + ' is used ' + tags[tag] + ' times');
     params.max = Math.max(tags[tag], params.max);
     params.min = Math.min(tags[tag], params.min);
   }
@@ -94,7 +91,6 @@ function calculateTagClass(count, params) {
 function generateTags() {
   /* [NEW] create a new variable allTags with an empty object */
   let allTags = {};
-  console.log('allTags', allTags);
 
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
@@ -137,7 +133,6 @@ function generateTags() {
   const tagList = document.querySelector('.tags');
 
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams);
 
   /* [NEW] create variable for all links HTML code */
   let allTagsHTML = '';
@@ -153,8 +148,6 @@ function generateTags() {
       '">' +
       tag +
       '</a></li>';
-
-    console.log('tagLinkHTML:', tagLinkHTML);
 
     allTagsHTML += tagLinkHTML;
   }
@@ -175,7 +168,7 @@ function tagClickHandler(event) {
 
   /* make a new constant "href" and read the attribute "href" of the clicked element */
   const href = clickedElement.getAttribute('href');
-
+  console.log('Clicked element atribute' + href);
   /* make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
 
@@ -203,6 +196,7 @@ function tagClickHandler(event) {
 
   /* execute function "generateTitleLinks" with article selector as argument */
   generateTitleLinks('[data-tags~="' + tag + '"]');
+  console.log('[data-tags~="' + tag + '"]');
 }
 
 function addClickListenersToTags() {
@@ -225,7 +219,6 @@ function calculateAuthorsParams(authors) {
   const params = { max: 0, min: 999999 };
   //Receive new params
   for (let author in authors) {
-    console.log(author + ' is used ' + authors[author] + ' times');
     params.max = Math.max(authors[author], params.max);
     params.min = Math.min(authors[author], params.min);
   }
@@ -285,7 +278,6 @@ function generateAuthors() {
   const authorsList = document.querySelector('.authors');
 
   const authorsParams = calculateAuthorsParams(allAuthors);
-  console.log('authorsParams:', authorsParams);
 
   /* [NEW] create variable for all links HTML code */
   let allAuthorsHTML = '';
@@ -321,8 +313,9 @@ function authorClickHandler(event) {
 
   /* make a new constant "href" and read the attribute "href" of the clicked element */
   const authorHrefAttribute = clickedElement.getAttribute('href');
+  console.log('Clicked element atribute' + authorHrefAttribute);
 
-  /* make a new constant "tag" and extract tag from the "href" constant */
+  /* make a new constant "authorName" and extract tag from the "href" constant */
   const authorName = authorHrefAttribute.replace('#author-', '');
 
   /* find all tag links with class active */
@@ -353,6 +346,7 @@ function authorClickHandler(event) {
 
   /* execute function "generateTitleLinks" with article selector as argument */
   generateTitleLinks('[data-author="' + authorName + '"]');
+  console.log('[data-author="' + authorName + '"]');
 }
 
 function addClickListenersToAuthors() {
