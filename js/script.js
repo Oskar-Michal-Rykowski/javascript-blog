@@ -185,6 +185,7 @@ function tagClickHandler(event) {
 
   /* find all tag links with "href" attribute equal to the "href" constant */
   const tagLinksHref = document.querySelectorAll('a[href="' + href + '"]');
+  console.log('tag href :', tagLinksHref);
 
   /* START LOOP: for each found tag link */
   for (let tagLinkHref of tagLinksHref) {
@@ -335,6 +336,7 @@ function authorClickHandler(event) {
   const authorLinksHref = document.querySelectorAll(
     'a[href="' + authorHrefAttribute + '"]'
   );
+  console.log('author href :', authorLinksHref);
 
   /* START LOOP: for each found tag link */
   for (let authorLinkHref of authorLinksHref) {
@@ -351,7 +353,7 @@ function authorClickHandler(event) {
 
 function addClickListenersToAuthors() {
   /* find all links to tags */
-  const authorLinks = document.querySelectorAll('.post-author a');
+  const authorLinks = document.querySelectorAll('a[href^="#author-"]');
 
   /* START LOOP: for each link */
   for (let authorLink of authorLinks) {
