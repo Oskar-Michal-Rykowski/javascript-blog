@@ -28,7 +28,6 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  optTagsListSelector = '.list .tags',
   optCloudClassCount = 5,
   optCloudClassPrefix = 'cloud-item-';
 
@@ -147,7 +146,9 @@ function generateTags() {
       tag +
       '">' +
       tag +
-      '</a></li>';
+      '(' +
+      allTags[tag] +
+      ')</a></li>';
 
     allTagsHTML += tagLinkHTML;
   }
@@ -292,7 +293,9 @@ function generateAuthors() {
       articleAuthor +
       '">' +
       articleAuthor +
-      '</a></li>';
+      '(' +
+      allAuthors[articleAuthor] +
+      ')</a></li>';
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
     allAuthorsHTML += authorLinkHTML;
